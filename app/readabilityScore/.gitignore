@@ -1,0 +1,17 @@
+# Eclipse
+.settings
+.pydevproject
+
+
+# Python
+*.pyc
+
+# Other
+*.swp
+*.*~
+
+# exclude everything
+temp/*
+
+# exception to the rule
+!temp/.gitkeep  

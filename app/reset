@@ -1,0 +1,2 @@
+sudo supervisorctl restart tasha
+sudo service nginx restart

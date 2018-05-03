@@ -1,7 +1,9 @@
-*.pyc
-bin/
-*.class
-*.exe
-*.gz
-*.tar
-*.zip
+**.pyc
+**.class
+**.exe
+**.gz
+**.tar
+**.zip
+**.*~
+**.swp
+

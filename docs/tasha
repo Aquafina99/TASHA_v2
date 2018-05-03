@@ -1,0 +1,11 @@
+add_header Access-Control-Allow-Origin *;
+server {
+       listen 80;
+       location /tasha {
+                proxy_pass http://127.0.0.1:8086;
+        }
+       location / {
+                proxy_pass http://127.0.0.1:1049;
+        }
+        proxy_read_timeout 1200;
+}

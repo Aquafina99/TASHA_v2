@@ -1,0 +1,9 @@
+# Python
+*.pyc
+
+# exclude everything
+temp/*
+config.ini
+
+# exception to the rule
+!temp/.gitkeep 
