@@ -13,12 +13,7 @@ except ImportError:
     from urlparse import urlparse
     from urllib2 import urlopen
     from urllib import urlencode
-
-try:
     import json
-except ImportError:
-    # Older versions of Python (i.e. 2.4) require simplejson instead of json
-    import simplejson as json
 
 class WatsonAPI:
     # Setup the endpoints
@@ -700,13 +695,11 @@ class WatsonAPI:
         password = parser.get('watson', 'password') # service credentials required
         results = ""
         try:
-            results = requests.post(url, auth=(username, password), headers = {"content-type": "text/plain"}, data=text)
+            results = requests.post(url, auth=(username, password), headers = {"Content-type": "text/plain", 'Accept':'application/json'}, data=text)
         except Exception as e:
             print(e)
             return {'status': 'ERROR', 'statusInfo': 'network-error'}
         try:
-            print("RESULTS?")
-	    print(results.json())
             return results.json()
         except Exception as e:
             if results != "":
