@@ -1,5 +1,7 @@
 # Python
 *.pyc
+*test.py
+*test.txt
 
 # exclude everything
 temp/*

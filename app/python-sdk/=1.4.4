@@ -1,0 +1,267 @@
+Downloading/unpacking pylint
+Downloading/unpacking configparser (from pylint)
+  Downloading configparser-3.5.0.tar.gz
+  Running setup.py (path:/tmp/pip_build_ubuntu/configparser/setup.py) egg_info for package configparser
+    
+Downloading/unpacking backports.functools-lru-cache (from pylint)
+  Downloading backports.functools_lru_cache-1.3-py2.py3-none-any.whl
+Requirement already satisfied (use --upgrade to upgrade): six in /usr/lib/python2.7/dist-packages (from pylint)
+Downloading/unpacking isort>=4.2.5 (from pylint)
+Downloading/unpacking mccabe (from pylint)
+  Downloading mccabe-0.5.2-py2.py3-none-any.whl
+Downloading/unpacking astroid>=1.4.5,<1.5.0 (from pylint)
+Downloading/unpacking wrapt (from astroid>=1.4.5,<1.5.0->pylint)
+  Downloading wrapt-1.10.8.tar.gz
+  Running setup.py (path:/tmp/pip_build_ubuntu/wrapt/setup.py) egg_info for package wrapt
+    
+Downloading/unpacking lazy-object-proxy (from astroid>=1.4.5,<1.5.0->pylint)
+  Downloading lazy-object-proxy-1.2.2.tar.gz
+  Running setup.py (path:/tmp/pip_build_ubuntu/lazy-object-proxy/setup.py) egg_info for package lazy-object-proxy
+    
+    warning: no directories found matching 'examples'
+    warning: no files found matching '.isort.cfg'
+    warning: no previously-included files matching '*.py[cod]' found anywhere in distribution
+    warning: no previously-included files matching '__pycache__' found anywhere in distribution
+    warning: no previously-included files matching '*.so' found anywhere in distribution
+    warning: no previously-included files matching '*.dylib' found anywhere in distribution
+Installing collected packages: pylint, configparser, backports.functools-lru-cache, isort, mccabe, astroid, wrapt, lazy-object-proxy
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/abstract_class_instantiated_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/abstract_class_instantiated_py3.py", line 14
+    class GoodClass(object, metaclass=abc.ABCMeta):
+                                     ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/abstract_method_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/abstract_method_py3.py", line 35
+    class Structure(object, metaclass=abc.ABCMeta):
+                                     ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/async_functions.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/async_functions.py", line 5
+    async def next(): # [redefined-builtin]
+            ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/bad_exception_context.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/bad_exception_context.py", line 14
+    raise IndexError from 1 # [bad-exception-context]
+                        ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/class_members_py30.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/class_members_py30.py", line 34
+    class TestMetaclass(object, metaclass=ABCMeta):
+                                         ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/continue_in_finally.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/continue_in_finally.py", line 9
+    continue # [continue-in-finally]
+SyntaxError: 'continue' not supported inside 'finally' clause
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/duplicate_argument_name.py ...
+SyntaxError: duplicate argument '_' in function definition (duplicate_argument_name.py, line 4)
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/exec_used_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/exec_used_py3.py", line 4
+    exec('a = 1', globals={}) # [exec-used]
+                         ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/invalid_star_assignment_target.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/invalid_star_assignment_target.py", line 3
+    *FIRST = [1, 2, 3] # [invalid-star-assignment-target]
+    ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/iterable_context_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/iterable_context_py3.py", line 11
+    class SomeClass(metaclass=Meta):
+                             ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/mapping_context_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/mapping_context_py3.py", line 15
+    class SomeClass(metaclass=Meta):
+                             ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/membership_protocol_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/membership_protocol_py3.py", line 20
+    class IterableClass(metaclass=MetaOldIterable):
+                                 ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/misplaced_future.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/misplaced_future.py", line 3
+    from __future__ import print_function # [misplaced-future]
+SyntaxError: from __future__ imports must occur at the beginning of the file
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/nonlocal_and_global.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/nonlocal_and_global.py", line 5
+    nonlocal missing
+                   ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/nonlocal_without_binding.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/nonlocal_without_binding.py", line 9
+    nonlocal a
+             ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/not_async_context_manager.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/not_async_context_manager.py", line 50
+    async def bad_coro():
+            ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/not_in_loop.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/not_in_loop.py", line 7
+    continue # [not-in-loop]
+SyntaxError: 'continue' not properly in loop
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/raising_non_exception_py3.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/raising_non_exception_py3.py", line 13
+    raise Exc from missing # [raising-non-exception]
+                 ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/return_outside_function.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/return_outside_function.py", line 2
+    return # [return-outside-function]
+SyntaxError: 'return' outside function
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/star_needs_assignment_target.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/star_needs_assignment_target.py", line 3
+    FIRST = *[1, 2]  # [star-needs-assignment-target]
+            ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/star_needs_assignment_target_py35.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/star_needs_assignment_target_py35.py", line 8
+    UNPACK_TUPLE = (*range(4), 4)
+                    ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/syntax_error.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/syntax_error.py", line 1
+    def toto # [syntax-error]
+                            ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/syntax_error_jython.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/syntax_error_jython.py", line 1
+    def toto # [syntax-error]
+                            ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/too_many_star_expressions.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/too_many_star_expressions.py", line 3
+    *FIRST, *SECOND = [1, 2, 3] # [too-many-star-expressions]
+    ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/unbalanced_tuple_unpacking_py30.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/unbalanced_tuple_unpacking_py30.py", line 9
+    first, second, *last = (1, 2, 3, 4)
+                   ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/undefined_variable_py30.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/undefined_variable_py30.py", line 8
+    def test(self)->Undefined: # [undefined-variable]
+                  ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/unpacking_generalizations.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/unpacking_generalizations.py", line 16
+    func_variadic_args(*(2, 3), *(3, 4), *(4, 5))
+                                ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/used_before_assignment_nonlocal.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/used_before_assignment_nonlocal.py", line 10
+    nonlocal cnt
+               ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_from_iterable_py33.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_from_iterable_py33.py", line 7
+    yield from 10  # [not-an-iterable]
+             ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_from_outside_func.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_from_outside_func.py", line 2
+    yield from [1, 2]  # [yield-outside-function]
+             ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_inside_async_function.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_inside_async_function.py", line 4
+    async def good_coro():
+            ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_outside_func.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/functional/yield_outside_func.py", line 2
+    yield 1  # [yield-outside-function]
+SyntaxError: 'yield' outside function
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/input/func_kwoa_py30.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/input/func_kwoa_py30.py", line 3
+    def function(*, foo):
+                  ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/input/func_return_yield_mix_py_33.py ...
+SyntaxError: 'return' with argument inside generator (func_return_yield_mix_py_33.py, line 8)
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/input/func_unused_import_py30.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/input/func_unused_import_py30.py", line 10
+    class Meta(metaclass=abc.ABCMeta):
+                        ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/input/func_w0705.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/input/func_w0705.py", line 28
+    __revision__ += 1
+SyntaxError: default 'except:' must be last
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/input/syntax_error.py ...
+Sorry: IndentationError: expected an indented block (syntax_error.py, line 2)
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/regrtest_data/bad_package/__init__.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/regrtest_data/bad_package/__init__.py", line 2
+    raise missing.Missing..
+                          ^
+SyntaxError: invalid syntax
+
+Compiling /tmp/pip_build_ubuntu/pylint/pylint/test/regrtest_data/syntax_error.py ...
+  File "/tmp/pip_build_ubuntu/pylint/pylint/test/regrtest_data/syntax_error.py", line 1
+    class A extends B {}
+                  ^
+SyntaxError: invalid syntax
+
+Cleaning up...
+Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/pip/basecommand.py", line 122, in main
+    status = self.run(options, args)
+  File "/usr/lib/python2.7/dist-packages/pip/commands/install.py", line 283, in run
+    requirement_set.install(install_options, global_options, root=options.root_path)
+  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1436, in install
+    requirement.install(install_options, global_options, *args, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 672, in install
+    self.move_wheel_files(self.source_dir, root=root)
+  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 902, in move_wheel_files
+    pycompile=self.pycompile,
+  File "/usr/lib/python2.7/dist-packages/pip/wheel.py", line 206, in move_wheel_files
+    clobber(source, lib_dir, True)
+  File "/usr/lib/python2.7/dist-packages/pip/wheel.py", line 193, in clobber
+    os.makedirs(destsubdir)
+  File "/usr/lib/python2.7/os.py", line 157, in makedirs
+    mkdir(name, mode)
+OSError: [Errno 13] Permission denied: '/usr/local/lib/python2.7/dist-packages/pylint-1.6.4.dist-info'
+
+Storing debug log for failure in /home/ubuntu/.pip/pip.log
