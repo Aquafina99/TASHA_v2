@@ -1,0 +1,7 @@
+*.pyc
+bin/
+*.class
+*.exe
+*.gz
+*.tar
+*.zip
