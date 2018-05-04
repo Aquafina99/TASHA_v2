@@ -87,22 +87,6 @@ def ReadabilityScore():
     readability = getReadabilityScore(content)
     return jsonify(readability)
 
-@app.route('/tasha/syntax_error_count', methods=['POST','GET'])
-@auth.login_required
-def SyntaxMetric():
-    """
-    Get Syntax Error Count
-    @input: JSON with content
-    @return the syntax error count
-    @rtype: JSON
-    """
-    args = parser.parse_args()
-    content = args['content'];
-    r = requests.post("http://162.246.157.115/checkDocument", data={'data': content})
-    m  = r.text
-    y = BeautifulSoup(m, "html5lib")
-    return jsonify({"errors":len(y.results.findAll("error"))})
-
 @app.route('/tasha/personality', methods=['POST', 'GET'])
 @auth.login_required
 def ProfileResult():
@@ -117,17 +101,43 @@ def ProfileResult():
     args = parser.parse_args()
     content = args['content'];
     # Create the AlchemyAPI Object    
-    alchemyapi = WatsonAPI()
+    watsonapi = WatsonAPI()
 
-    file_name = content # this is the text file that we are passing through
+    response = watsonapi.profile(content)
 
-    response = alchemyapi.profile(file_name)
+    return jsonify(response)
 
-    return jsonify(response) # ['word_count'], ['personality'], ['needs'], ['values']
-                    # are the important keys that contain necessary data
+@app.route('/tasha/alchemy', methods=['POST', 'GET'])
+@auth.login_required
+def EmotionResult():
+    """
+    Returns language analysis based on watson natural language understanding 
+    includes the following:
+      - Emotions (anger, joy, fear, sadness, disgust) for given text,
+      - Sentiment (positive/negative)
+      - Entities
+      - Keywords
+      - Metadata
+      - Relations
+      - Concepts 
+
+    @rtype: JSON
+    @return: JSON that lists all alchemy analysis and their percentages. 
+    """
+
+    args = parser.parse_args()
+    content = args['content'];
+    watsonapi = WatsonAPI()
+    response = watsonapi.emotion(content)
+
+    if response['status'] == 'OK':
+        return jsonify(response) # ['docEmotions'] key contains needed data
 
 
-@app.route('/tasha/sentiment', methods=['POST', 'GET'])
+    return jsonify(response)
+
+
+@app.route('/tasha/alchemy', methods=['POST', 'GET'])
 @auth.login_required
 def SentimentResult():
     """
@@ -153,159 +163,6 @@ def SentimentResult():
 
     return jsonify(response)
 
-
-
-# KeywordSentimentResult intakes SoP text and
-# returns important keywords and the sentiment & relevance
-# of each keyword.
-@app.route('/tasha/keywords', methods=['POST', 'GET'])
-@auth.login_required
-def KeywordSentimentResult():
-    """
-    Returns keywords with their sentiment and relevance,
-    as well as the count for positive, neutral and negative
-    keywords given a text file (default).
-
-    @rtype: JSON
-    @return: JSON that contains keywords, their
-        sentiment, their relevance and counts of 
-        positive, neutral and negative keywords.
-    """
-
-    args = parser.parse_args()
-    content = args['content'];
-    # Create the AlchemyAPI Object
-    alchemyapi = AlchemyAPI()
-
-    file_name = content # this is the file/url that we are passing through
-    ftype = 'text' # can change to 'url' or 'html'
-    response = alchemyapi.keywords(ftype, file_name, {'sentiment': 1})
-   
-    if response['status'] == 'OK':
-
-        # count of +, n, - words
-        positive = 0
-        neutral = 0
-        negative = 0
-
-        response["typeCount"] = {}
-        
-        keyword_list = response["keywords"]
-
-        for element in keyword_list:
-      
-            if element["sentiment"]["type"] == "positive":
-                positive += 1
-            elif element["sentiment"]["type"] == "neutral":
-                neutral += 1
-            elif element["sentiment"]["type"] == "negative":
-                negative += 1
-
-        response["typeCount"]["positive"] = positive
-        response["typeCount"]["neutral"] = neutral
-        response["typeCount"]["negative"] = negative
-
-        return jsonify(response) # ['keywords'] key contains needed data
-                                 # ['typeCount'] key contains the type count
-
-
-    return jsonify('status Not OK')
-
-
-# TargetedSentimentResult intakes SoP text and the target
-# phrase and returns the sentiment of the target phrase.
-@app.route('/tasha/targeted', methods=['POST', 'GET'])
-@auth.login_required
-def TargetedSentimentResult():
-    """
-    Returns sentiment analysis results on the
-    given a selection of a text (within text).
-    
-    @rtype: JSON
-    @return: JSON that contains the overall
-        sentiment analysis result.
-    """
-
-    args = parser.parse_args()
-    content = args['content'];
-    # Create the AlchemyAPI Object
-    alchemyapi = AlchemyAPI()
-
-    # this is the target text that we want to analyze
-    target = 'my undergraduate degree at UBC' 
-
-    file_name = content # this is the file/url that we are passing through
-    ftype = 'text' # can change to 'url' or 'html'
-    response = alchemyapi.sentiment_targeted(ftype, file_name, target)
-
-    if response['status'] == 'OK':
-        return jsonify(response) # ['docSentiment'] key contains needed data
-
-
-    return jsonify('status Not OK')
-
-
-@app.route('/tasha/concepts', methods=['POST', 'GET'])
-@auth.login_required
-def ConceptResult():
-    """
-    Returns relevant concepts given a text file.
-
-    To get keyword sentiment results, you can pass a string
-    ('html' or 'url') indicating the file type (ftype) as a 
-    parameter to get the sentiment result of those files.
-
-    @rtype: JSON
-    @return: JSON that lists all relevant concepts.
-    """
-
-    args = parser.parse_args()
-    content = args['content'];
-    # Create the AlchemyAPI Object
-    alchemyapi = AlchemyAPI()
-
-    file_name = content # this is the file/url that we are passing through
-    ftype = 'text' # can change to 'url' or 'html'
-    response = alchemyapi.concepts(ftype, file_name)
-
-    if response['status'] == 'OK':
-        return jsonify(response) # ['concepts'] key contains needed data
-
-
-    return jsonify('status Not OK')
-
-
-@app.route('/tasha/emotions', methods=['POST', 'GET'])
-@auth.login_required
-def EmotionResult():
-    """
-    Returns emotions (anger, joy, fear, sadness, disgust) 
-    for the given text file
-
-    To get emotion results, you can pass a string ('html'
-    or 'url') indicating the file type (ftype) as a parameter
-    to get the emotion result of those files.
-
-    @rtype: JSON
-    @return: JSON that lists emotions and their percentages. 
-    """
-
-    args = parser.parse_args()
-    content = args['content'];
-    ftype = args.get('ftype');
-    # Create the AlchemyAPI Object    
-    alchemyapi = AlchemyAPI()
-
-    file_name = content # this is the file/url that we are passing through
-    if ftype != 'html':
-    	ftype = 'text' # can change to 'url' or 'html'
-    response = alchemyapi.emotion(ftype, file_name)
-
-    if response['status'] == 'OK':
-        return jsonify(response) # ['docEmotions'] key contains needed data
-
-
-    return jsonify(response)
 
 #required to run
 if __name__ == '__main__':
