@@ -35,8 +35,8 @@ def test3(test_text):
 def main():
     test_file = open("text_test.txt")
     test_text = test_file.read()
-    #test1(test_text)
-    #test2(test_text)
+    test1(test_text)
+    test2(test_text)
     test3(test_text)
     test_file.close()
 
