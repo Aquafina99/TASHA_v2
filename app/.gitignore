@@ -5,6 +5,7 @@
 
 # exclude everything
 temp/*
+testfiles/
 config.ini
 
 # exception to the rule

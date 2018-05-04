@@ -16,39 +16,10 @@ except ImportError:
     import json
 
 class WatsonAPI:
-    # Setup the endpoints
-    # Source for web API calls for emotional analysis: http://www.alchemyapi.com/api/api-calls-emotion-analysis 2016-11-17
-
-    # The base URL for all endpoints
-    BASE_URL = 'http://access.alchemyapi.com/calls'
-
     s = requests.Session()
 
-    def __init__(self):
-        """	
-        Initializes the SDK so it can send requests to AlchemyAPI for analysis.
-        It loads the API key from api_key.txt and configures the endpoints.
-        """
-
-        import sys
-        try:
-            # Open the config file and get api key
-            parser = SafeConfigParser()
-            parser.read('config.ini')
-            key = parser.get('api_key', 'api_key') 
-            if key == '':
-                # The key file should't be blank
-                print(
-                    'API Key is blank. Please register for an API key')
-                sys.exit(0)
-            else:
-                # setup the key
-                self.apikey = key
-        except Exception as e:
-            print(e)
-
     # New alchemy analysis.
-    def alchemy(self, text, options={}):
+    def alchemy(self, text, features=[]):
         """
         Provides emotional analysis of the text for text, a URL or HTML.
 
@@ -67,11 +38,14 @@ class WatsonAPI:
         parser = SafeConfigParser()
         parser.read('config.ini')
         base_url = parser.get('alchemy', 'base_url')
-        features = parser.get('alchemy', 'features')
+        if not features:
+            features = parser.get('alchemy', 'features')
+        else:
+            features = ','.join(features) 
         username = parser.get('alchemy', 'username') # service credentials required
         password = parser.get('alchemy', 'password') # service credentials required
 
-        url = ("%s&%s" % (base_url, features)) 
+        url = ("%s&features=%s" % (base_url, features)) 
         results = ""
         try:
             results = requests.post(url, auth=(username, password), headers = {"Content-type": "text/plain", 'Accept':'application/json'}, data=text)

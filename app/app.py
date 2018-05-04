@@ -33,7 +33,7 @@ app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'bib', 'xls'])
 parser = reqparse.RequestParser()
 parser.add_argument('person_id', type=str)
 parser.add_argument('content', type=str)
-
+parser.add_argument('features', action='append')
 @auth.get_password	
 
 #this it taken from Miguel Grinberg from http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask -----
@@ -120,49 +120,23 @@ def EmotionResult():
       - Metadata
       - Relations
       - Concepts 
-
+    If arguments include specific features, will only run the analysis listed
     @rtype: JSON
     @return: JSON that lists all alchemy analysis and their percentages. 
     """
 
     args = parser.parse_args()
-    content = args['content'];
+    content = args['content']
+    features = args.get('features', [])
+    
     watsonapi = WatsonAPI()
-    response = watsonapi.emotion(content)
+    response = watsonapi.alchemy(content,features)
 
     if response['status'] == 'OK':
         return jsonify(response) # ['docEmotions'] key contains needed data
 
 
     return jsonify(response)
-
-
-@app.route('/tasha/alchemy', methods=['POST', 'GET'])
-@auth.login_required
-def SentimentResult():
-    """
-    Returns the overall sentiment analysis given a text file.
-
-    @rtype: JSON
-    @return: JSON that contains the overall
-        sentiment analysis result.
-    """
-
-    args = parser.parse_args()
-    content = args['content'];
-    # Create the AlchemyAPI Object
-    alchemyapi = AlchemyAPI()
-
-    file_name = content # this is the file/url that we are passing through
-    ftype = 'text' # can change to 'url' or 'html'
-    response = alchemyapi.sentiment(ftype, file_name)
-    print(response)
-    if response['status'] == 'OK':
-        return jsonify(response) # ['docSentiment'] key contains needed data
-
-
-    return jsonify(response)
-
 
 #required to run
 if __name__ == '__main__':
