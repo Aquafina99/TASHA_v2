@@ -18,19 +18,24 @@ except ImportError:
 class WatsonAPI:
     s = requests.Session()
 
-    # New alchemy analysis.
     def alchemy(self, text, features=[]):
         """
-        Provides emotional analysis of the text for text, a URL or HTML.
+        Provides IBM Natural Language Understanding analysis of the text for text, a URL or HTML.
 
         INPUT:
-        flavor -> which version of the call, i.e. text, url or html.
-        data -> the data to analyze, either the text, the url or html code.
-        options -> various parameters that can be used to adjust how the API works, see below for more info on the available options.
+        text -> the data to analyze.
+        features -> various parameters that can be used to adjust how the API works, see below for more info on the available options.
 
         Available Options:
-        None at the moment.
-
+         concepts
+         categories
+         emotion
+         entities
+         keywords
+         metadata
+         relations
+         semantic_roles
+         sentiment
 
         OUTPUT:
         The response, already converted from JSON to a Python object. 
@@ -63,6 +68,10 @@ class WatsonAPI:
 
     def profile(self, text):
         """Returns the profile by doing a POST to /v3/profile with text
+           Provides IBM Personality analysis of the text for text.
+
+           INPUT:
+           text -> the data to analyze.
 
            Sources:
            http://www.ibm.com/watson/developercloud/doc/personality-insights/
