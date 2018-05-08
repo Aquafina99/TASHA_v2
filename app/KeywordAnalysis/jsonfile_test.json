@@ -1,0 +1,19 @@
+{
+    "collection": [
+        {
+            "id": "1",
+            "title": "Stephen king's It",
+            "author": "Stephen King",
+            "content": "Bill’s there first. He sits in one of the wing-back chairs just inside the Reading Room door, watching as Mike deals with the library’s last few customers of the night—an old lady with a clutch of paperback gothics, a man with a huge historical tome on the Civil War, and a skinny kid waiting to check out a novel with a seven-day-rental sticker in an upper corner of its plastic cover. Bill sees with no sense of surprise or serendipity at all that it is his own latest novel. He feels that surprise is beyond him, serendipity a believed-in reality that has turned out to be only a dream after all.
+
+A pretty girl, her tartan skirt held together with a big gold safety pin (Christ, I haven’t seen one of those in years, Bill thinks, are they coming back?), is feeding quarters into the Xerox machine and copying an offprint with one eye on the big pendulum clock behind the checkout desk. The sounds are library-soft and library-comforting: the hush-squeak of soles and heels on the red-and-black linoleum of the floor; the steady tock and tick of the clock dropping off dry seconds; the catlike purr of the copying machine.
+
+The boy takes his William Denbrough novel and goes to the girl at the copier just as she finishes and begins to square up her pages."
+        },
+        {
+            "id": "blabla",
+            "iscategorical": "0"
+        }
+    ],
+    "collection_name": "name",
+}
