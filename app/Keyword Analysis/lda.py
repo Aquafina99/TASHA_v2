@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import csv
 import mysql.connector
 
-FILEPATH = '/home/dfserrano/Projects/sandbox/data/oilsands_clean.csv'
+FILEPATH = 
 CONTENT_CELL_INDEX = 4;
 NUM_TOPICS = 100
 NUM_ITERATIONS = 20
@@ -25,8 +25,8 @@ NO_ABOVE = 0.25 # if a word appears in more than NO_ABOVE % docs, it is removed
 NO_BELOW = 5    # if a word appears in less than NO_BELOW docs, it is removed
 
 DB_HOST = '127.0.0.1'
-DB_USERNAME = 'ta_user'
-DB_PASSWORD = 'MPQFoeayuW5zIDHq'
+DB_USERNAME = 
+DB_PASSWORD = 
 DB_NAME = 'text_analysis'
 
 DEBUG = False
