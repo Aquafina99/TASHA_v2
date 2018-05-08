@@ -28,10 +28,6 @@ def test3(test_text):
     print(json.dumps(response))
     outfile.close()
 
-    
-
-
-# Parameters: first_name, last_name, twitter_handle=None, mendeleyID=None, email=None, sciverseID=None, googleScholarID=None
 def main():
     test_file = open("text_test.txt")
     test_text = test_file.read()
