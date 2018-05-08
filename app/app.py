@@ -11,6 +11,9 @@ from bs4 import BeautifulSoup
 import requests
 from flask.ext.cache import Cache
 
+#error_handler
+from error_handler import ExceptionHandler
+
 #watson stuff
 from watson_developer_cloud import AlchemyLanguageV1
 from watsonapi import WatsonAPI
@@ -73,6 +76,23 @@ def loaddatabasetest():
     args = parser.parse_args()
     return jsonify("Hello. Server is running.")
 
+@app.route('/tasha/json_test', methods=['POST'])
+@auth.login_required
+def jsontest():
+    """
+    Check if server is running properly
+
+    @return: "Hello. Server is running."
+    @rtype: string
+    """
+    try:
+        req = request.get_json(True)
+        content = req['content']
+        return jsonify("Hello. Server is running.")
+    except:
+        raise ExceptionHandler('Please send a proper JSON object', status_code=400)
+
+
 @app.route('/tasha/readability', methods=['POST','GET'])
 @auth.login_required
 def ReadabilityScore():
@@ -82,8 +102,12 @@ def ReadabilityScore():
     @return: the readability scores
     @rtype: JSON
     """
-    args = parser.parse_args()
-    content = args['content'];
+    try:
+        req = request.get_json(True)
+        content = req['content']
+    except:
+        raise ExceptionHandler('Please send a proper JSON object', status_code=400)
+
     readability = getReadabilityScore(content)
     return jsonify(readability)
 
@@ -97,12 +121,13 @@ def ProfileResult():
     @rtype: JSON
     @return: JSON that contains personality insight
     """
+    try:
+        req = request.get_json(True)
+        content = req['content']
+    except:
+        raise ExceptionHandler('Please send a proper JSON object', status_code=400)
 
-    args = parser.parse_args()
-    content = args['content'];
-    # Create the AlchemyAPI Object    
     watsonapi = WatsonAPI()
-
     response = watsonapi.profile(content)
 
     return jsonify(response)
@@ -124,10 +149,13 @@ def EmotionResult():
     @rtype: JSON
     @return: JSON that lists all alchemy analysis and their percentages. 
     """
+    try:
+        req = request.get_json(True)
+        content = req['content']
+    except:
+        raise ExceptionHandler('Please send a proper JSON object', status_code=400)
 
-    args = parser.parse_args()
-    content = args['content']
-    features = args.get('features', [])
+    features = req.get('features', [])
     
     watsonapi = WatsonAPI()
     response = watsonapi.alchemy(content,features)
@@ -137,6 +165,15 @@ def EmotionResult():
 
 
     return jsonify(response)
+
+@app.errorhandler(ExceptionHandler)
+def handle_exception(error):
+    """
+     Used for simple error handling
+    """
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
 #required to run
 if __name__ == '__main__':
