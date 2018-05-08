@@ -4,6 +4,11 @@
 @author: Diego Serrano
 """
 from stop_words import get_stop_words
+from nltk.stem import WordNetLemmatizer
+from nltk import word_tokenize, pos_tag
+from six import iteritems
+from datetime import date
+
 
 class KeywordAnalysis:
     num_topics = 100
@@ -15,7 +20,7 @@ class KeywordAnalysis:
     no_below = 5
 
     
-    def loadTokenizedDocuments(documents):
+    def loadTokenizedDocuments(self,documents):
         """ Creates a list of tokenized documents.
         This procedure removes stopwords, keeping only nouns and verbs in their lemmatized form.
         The function assumes the text is at the cell with index 4.
@@ -34,9 +39,9 @@ class KeywordAnalysis:
         
         doc_counter = 0;
         
-        for row in documents['docs']:
-            content = row['content']
-            doc_tokens = word_tokenize(content.decode('utf-8'))
+        for doc in documents['collection']:
+            content = doc['content']
+            doc_tokens = word_tokenize(content)
             
             # keep only nouns and verbs
             pos_tokens = pos_tag(doc_tokens)
@@ -56,6 +61,5 @@ class KeywordAnalysis:
         
             if doc_counter % 100 == 0:
                 print("  Processing document " + str(doc_counter))
-        print(docs)
         return docs
 
