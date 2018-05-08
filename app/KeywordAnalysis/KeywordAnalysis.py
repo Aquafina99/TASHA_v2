@@ -62,7 +62,7 @@ class KeywordAnalysis:
                 print("  Processing document " + str(doc_counter))
         return docs
 
-    def createDictionary(self, docs, output = 'dictionary.dict'):
+    def createDictionary(self, docs):
         """Creates a dictionary from a list of tokenized documents.  
         This procedure removes extremely popular and infrequent words.
         Args: docs (lst): List of tokenized documents
