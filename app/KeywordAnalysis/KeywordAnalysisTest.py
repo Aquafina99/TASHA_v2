@@ -16,10 +16,18 @@ def test2(docs):
     keywordAnalysis = KeywordAnalysis()
     response = keywordAnalysis.createDictionary(docs)
     print(response)
+    
+#tests creating lda model
+def test3(docs, dictionary):
+    keywordAnalysis = KeywordAnalysis()
+    response = keywordAnalysis.createLDAModel(docs, dictionary)
+    print(response)
 
 def main():
     docs = test1()
-    test2(docs)
+    dictionary = test2(docs)
+    response = test3(docs, dictionary)
+    print(response)
 
 if __name__=="__main__":
         main()

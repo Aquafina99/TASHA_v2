@@ -70,22 +70,37 @@ class KeywordAnalysis:
         """
         # turn our tokenized documents into a id <-> term dictionary
         dictionary = corpora.Dictionary(docs)
-        #dictionary.save('dictionary.dct')
-        
-        # If a dictionary already exists, replace the previous two line by the following line
-        # dictionary = corpora.Dictionary.load('dictionary.dct')
-        
+                
         freq = [doc_freq for word_id, doc_freq in iteritems(dictionary.dfs)]
-        #self.plotHistogram(freq, x_label = 'Words', y_label = 'Frequency', title = 'Dictionary Histogram - Unfiltered', 
-        #              bins = 100, output = 'dict-unfiltered.png')
-        
+
         # remove very common words (appear in more than 25% of docs) and words with very low frequency (appear in less than 5 docs)
-        dictionary.filter_extremes(no_above = NO_ABOVE, no_below = NO_BELOW)
+        dictionary.filter_extremes(no_above = self.no_above, no_below = self.no_below)
         freq = [doc_freq for word_id, doc_freq in iteritems(dictionary.dfs)]
-        #self.plotHistogram(freq, x_label = 'Words', y_label = 'Frequency', title = 'Dictionary Histogram - Filtered', 
-        #              bins = 100, output = 'dict-filtered.png')
-        
+
         return dictionary
+    
+    
+    def createLDAModel(docs, dictionary, num_topics = 100, iterations = self.num_iterations, 
+                       passes = self.num_passes, workers = 3, output = 'lda_model'):
+        """Creates the LDA model for the given documents.  
+        Args:
+            docs (lst): List of tokenized documents
+            dictionary (lst): The dictionary
+            num_topics (int): The number of topics to discover
+            iterations (int): The number of iterations of the LDA method
+            passes (int): The number of passes of the LDA method
+            workers (int): The number of workers employed in the creation of the model
+            output (str): Prefix used to store the model in a set of files
+        Returns: ldamodel: The LDA model
+        """
+        # convert tokenized documents into a document-term matrix
+        corpus = [dictionary.doc2bow(text) for text in docs]
+    
+        # generate LDA model
+        ldamodel = LdaMulticore(corpus, id2word = dictionary, num_topics = self.num_topics, 
+                                iterations = iterations, passes = passes, workers = workers)    
+        return ldamodel
+    
     
     def plotHistogram(data, x_label = "X", y_label = "Frequency", title = "", bins = 20, output = "output.png"):
         """Plots a histogram and stores it as a PNG file.  
